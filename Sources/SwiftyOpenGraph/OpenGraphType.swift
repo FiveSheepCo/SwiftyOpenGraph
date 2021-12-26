@@ -41,8 +41,8 @@ public enum OpenGraphType {
     case profile(ProfileAttributes)
     case website
     
-    init?(kVPs: [_KeyValuePair]) {
-        guard let type = kVPs.first(where: { $0.key == Constants.typeProperty })?.value else { return nil }
+    init(kVPs: [_KeyValuePair]) {
+        let type = kVPs.first(where: { $0.key == Constants.typeProperty })?.value
         
         switch type {
         case SongAttributes.Constants.type:
@@ -54,7 +54,7 @@ public enum OpenGraphType {
         case RadioStationAttributes.Constants.type:
             self = .radioStation(.init(properties: kVPs))
         default:
-            if let videoSubKind = VideoAttributes.SubKind(rawValue: type) {
+            if let type = type, let videoSubKind = VideoAttributes.SubKind(rawValue: type) {
                 self = .video(.init(subKind: videoSubKind, properties: kVPs))
             } else {
                 self = .website

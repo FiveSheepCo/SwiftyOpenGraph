@@ -140,7 +140,7 @@ public struct OpenGraph {
             guard let firstImage = images.removeFirstIfExists() else { return nil }
             
             // Decode the type from the given properties
-            guard let type = OpenGraphType(kVPs: parsed) else { return nil }
+            let type = OpenGraphType(kVPs: parsed)
             
             // Set properties
             self.title = title
