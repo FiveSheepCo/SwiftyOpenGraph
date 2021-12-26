@@ -31,7 +31,8 @@ let package = Package(
         ),
         .testTarget(
             name: "SwiftyOpenGraphTests",
-            dependencies: ["SwiftyOpenGraph"]
+            dependencies: ["SwiftyOpenGraph"],
+            resources: [.copy("Examples")]
         ),
     ]
 )
