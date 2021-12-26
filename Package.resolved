@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SchafKit",
+        "repositoryURL": "https://github.com/Quintschaf/SchafKit.git",
+        "state": {
+          "branch": "master",
+          "revision": "8567f948567e4d6fccb80cca1402e1044a4b01e0",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftSoup",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup",
+        "state": {
+          "branch": "master",
+          "revision": "3fa09f4d79e5172b14cb50e02f1d5f115a2bbaef",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
