@@ -27,9 +27,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SwiftyOpenGraph",
-            dependencies: ["SwiftSoup", "SchafKit"]),
+            dependencies: ["SwiftSoup", "SchafKit"]
+        ),
         .testTarget(
             name: "SwiftyOpenGraphTests",
-            dependencies: ["SwiftyOpenGraph"]),
+            dependencies: ["SwiftyOpenGraph"]
+        ),
     ]
 )

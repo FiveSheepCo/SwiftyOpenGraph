@@ -33,7 +33,7 @@ extension OpenGraphType {
         /// The ISBN.
         public let isbn: String?
         /// The date the book was released.
-        public let releaseDate: String?
+        public let releaseDate: Date?
         /// Tag words associated with this book.
         public let tags: [String]
         
@@ -49,7 +49,7 @@ extension OpenGraphType {
         init(properties: [_KeyValuePair]) {
             var author: String?
             var isbn: String?
-            var releaseDate: String?
+            var releaseDateString: String?
             var tags: [String] = []
             
             for property in properties {
@@ -59,7 +59,7 @@ extension OpenGraphType {
                 case Constants.isbnProperty:
                     isbn = property.value
                 case Constants.releaseDateProperty:
-                    releaseDate = property.value
+                    releaseDateString = property.value
                 case Constants.tagProperty:
                     tags.append(property.value)
                 default:
@@ -69,7 +69,7 @@ extension OpenGraphType {
             
             self.author = author
             self.isbn = isbn
-            self.releaseDate = releaseDate
+            self.releaseDate = _getDate(from: releaseDateString)
             self.tags = tags
         }
     }

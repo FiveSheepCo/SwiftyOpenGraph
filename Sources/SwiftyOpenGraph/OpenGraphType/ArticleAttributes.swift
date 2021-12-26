@@ -29,11 +29,11 @@ extension OpenGraphType {
     
     public struct ArticleAttributes {
         /// When the article was first published.
-        public let publishedTime: String?
+        public let publishedTime: Date?
         /// When the article was last changed.
-        public let modifiedTime: String?
+        public let modifiedTime: Date?
         /// When the article is out of date after.
-        public let expirationTime: String?
+        public let expirationTime: Date?
         /// Writers of the article.
         public let authors: [String]
         /// A high-level section name. E.g. Technology.
@@ -53,9 +53,9 @@ extension OpenGraphType {
         }
         
         init(properties: [_KeyValuePair]) {
-            var publishedTime: String?
-            var modifiedTime: String?
-            var expirationTime: String?
+            var publishedTimeString: String?
+            var modifiedTimeString: String?
+            var expirationTimeString: String?
             var authors: [String] = []
             var section: String?
             var tags: [String] = []
@@ -63,11 +63,11 @@ extension OpenGraphType {
             for property in properties {
                 switch property.key {
                 case Constants.publishedTimeProperty:
-                    publishedTime = property.value
+                    publishedTimeString = property.value
                 case Constants.modifiedTimeProperty:
-                    modifiedTime = property.value
+                    modifiedTimeString = property.value
                 case Constants.expirationTimeProperty:
-                    expirationTime = property.value
+                    expirationTimeString = property.value
                 case Constants.authorProperty:
                     authors.append(property.value)
                 case Constants.sectionProperty:
@@ -79,9 +79,9 @@ extension OpenGraphType {
                 }
             }
             
-            self.publishedTime = publishedTime
-            self.modifiedTime = modifiedTime
-            self.expirationTime = expirationTime
+            self.publishedTime = _getDate(from: publishedTimeString)
+            self.modifiedTime = _getDate(from: modifiedTimeString)
+            self.expirationTime = _getDate(from: expirationTimeString)
             self.authors = authors
             self.section = section
             self.tags = tags

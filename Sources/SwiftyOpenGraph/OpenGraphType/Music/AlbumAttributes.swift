@@ -33,7 +33,7 @@ extension OpenGraphType {
         /// The musician that made this album.
         public let musician: String?
         /// The date the album was released.
-        public let releaseDate: String? // TODO: Date?
+        public let releaseDate: Date?
         
         enum Constants {
             static let type = "music.album"
@@ -46,7 +46,7 @@ extension OpenGraphType {
         init(properties: [_KeyValuePair]) {
             var songs: [SongAttributes] = []
             var musician: String?
-            var releaseDate: String?
+            var releaseDateString: String?
             
             for (index, property) in properties.enumerated() {
                 switch property.key {
@@ -61,7 +61,7 @@ extension OpenGraphType {
                 case Constants.musicianProperty:
                     musician = property.value
                 case Constants.releaseDateProperty:
-                    releaseDate = property.value
+                    releaseDateString = property.value
                 default:
                     break
                 }
@@ -69,7 +69,7 @@ extension OpenGraphType {
             
             self.songs = songs
             self.musician = musician
-            self.releaseDate = releaseDate
+            self.releaseDate = _getDate(from: releaseDateString)
         }
     }
 }

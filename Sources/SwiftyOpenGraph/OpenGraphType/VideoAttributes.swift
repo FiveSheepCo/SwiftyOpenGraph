@@ -40,7 +40,7 @@ extension OpenGraphType {
         /// The movie's length in seconds.
         public let duration: Int?
         /// The date the movie was released.
-        public let releaseDate: String?
+        public let releaseDate: Date?
         /// Tag words associated with this movie.
         public let tags: [String]
         /// Which series a tv episode belongs to.
@@ -62,7 +62,7 @@ extension OpenGraphType {
             var directors: [String] = []
             var writers: [String] = []
             var durationString: String?
-            var releaseDate: String?
+            var releaseDateString: String?
             var tags: [String] = []
             var series: String?
             
@@ -84,7 +84,7 @@ extension OpenGraphType {
                 case Constants.tagProperty:
                     tags.append(property.value)
                 case Constants.releaseDateProperty:
-                    releaseDate = property.value
+                    releaseDateString = property.value
                 case Constants.seriesProperty:
                     series = property.value
                 default:
@@ -96,7 +96,7 @@ extension OpenGraphType {
             self.directors = directors
             self.writers = writers
             self.duration = _getDuration(from: durationString)
-            self.releaseDate = releaseDate
+            self.releaseDate = _getDate(from: releaseDateString)
             self.tags = tags
             self.series = series
         }
