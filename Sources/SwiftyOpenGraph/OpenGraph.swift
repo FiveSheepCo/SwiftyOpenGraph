@@ -151,12 +151,11 @@ public struct OpenGraph {
             self.audios = audios
             self.videos = videos
             self.description = getFirstValue(for: Constants.descriptionProperty)
-            self.determiner = Determiner(rawValue: getFirstValue(for: Constants.descriptionProperty) ?? Constants.defaultDeterminer.rawValue) ?? Constants.defaultDeterminer
+            self.determiner = Determiner(rawValue: getFirstValue(for: Constants.determinerProperty) ?? Constants.defaultDeterminer.rawValue) ?? Constants.defaultDeterminer
             self.siteName = getFirstValue(for: Constants.siteNameProperty)
             
-            var locales = parsed.filter({ $0.key == Constants.localeProperty }).map(\.value)
-            self.locale = locales.removeFirstIfExists() ?? Constants.defaultLocale
-            self.alternateLocales = locales
+            self.locale = getFirstValue(for: Constants.localeProperty) ?? Constants.defaultLocale
+            self.alternateLocales = parsed.filter({ $0.key == Constants.alternateLocaleProperty }).map(\.value)
             
             self.additionalImages = images
         } catch let err {
