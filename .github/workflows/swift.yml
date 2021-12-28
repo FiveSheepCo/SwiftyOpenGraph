@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
           matrix:
-            xcode_version: ['13.2.1']
+            swift: ["5.5"]
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
