@@ -13,7 +13,7 @@ jobs:
             swift: ["5.5"]
     runs-on: macos-latest
     steps:
-    - uses: fwal/setup-swift@1.11.0
+    - uses: fwal/setup-swift@v1.11.0
       with:
           swift-version: ${{ matrix.swift }}
     - uses: actions/checkout@v2
