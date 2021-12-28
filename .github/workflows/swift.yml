@@ -8,9 +8,10 @@ on:
 
 jobs:
   build:
-
+    strategy:
+          matrix:
+            xcode_version: ['13.2.1']
     runs-on: macos-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Build
