@@ -79,6 +79,18 @@ public struct OpenGraph {
         static let defaultDeterminer = Determiner.blank
     }
     
+    public init?(url: String) async throws {
+        guard
+            let html =
+                try await SKNetworking
+                .request(url: url)
+                .stringValue else {
+                    return nil
+                }
+        
+        self.init(html: html)
+    }
+    
     public init?(html: String)  {
         do {
             let doc: Document = try SwiftSoup.parse(html)
@@ -99,8 +111,8 @@ public struct OpenGraph {
             guard
                 let title = getFirstValue(for: Constants.titleProperty),
                 let url = getFirstValue(for: Constants.urlProperty) else {
-                return nil
-            }
+                    return nil
+                }
             
             // Find images
             var images: [OpenGraphImage] = []
