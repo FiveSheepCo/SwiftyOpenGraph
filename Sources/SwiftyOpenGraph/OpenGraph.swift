@@ -83,7 +83,12 @@ public struct OpenGraph {
         guard
             let html =
                 try await SKNetworking
-                .request(url: url)
+                .request(
+                    url: url,
+                    options: [
+                        .headerFields(value: [.userAgent: "facebookexternalhit/1.1"]) // Some websites require this to return the open graph values
+                    ]
+                )
                 .stringValue else {
                     return nil
                 }
