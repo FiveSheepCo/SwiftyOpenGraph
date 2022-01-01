@@ -86,7 +86,7 @@ public struct OpenGraph {
                 .request(
                     url: url,
                     options: [
-                        .headerFields(value: [.userAgent: "facebookexternalhit/1.1"]) // Some websites require this to return the open graph values
+                        .headerFields(value: [.userAgent: "Googlebot"]) // Some websites require this to return the open graph values
                     ]
                 )
                 .stringValue else {
