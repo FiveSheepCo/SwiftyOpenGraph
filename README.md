@@ -3,6 +3,9 @@
 [![GithubCI_Status]][GithubCI_URL] [![LICENSE_BADGE]][LICENSE_URL] ![Platform](https://img.shields.io/badge/platforms-iOS%2013.0%20%7C%20macOS%2010.15%20%7C%20tvOS%2013.0%20%7C%20watchOS%206.0-F28D00.svg)
 
 -  [Usage](#usage)
+    - [Initialization](#initialization)
+    - [Base Properties](#base-properties)
+    - [Types](#types)
 -  [Installation](#installation)
 -  [License](#license)
 
