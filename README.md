@@ -96,7 +96,7 @@ We have chosen to use the CC0 1.0 Universal license for SwiftyOpenGraph. The fol
 
 <!-- References -->
 
-[GithubCI_Status]: https://github.com/Quintschaf/SwiftyOpenGraph/actions/workflows/swift.yml/badge.svg?branch=master
+[GithubCI_Status]: https://github.com/Quintschaf/SwiftyOpenGraph/actions/workflows/swift.yml/badge.svg?branch=main
 [GithubCI_URL]: https://github.com/Quintschaf/SwiftyOpenGraph/actions/workflows/swift.yml
 [LICENSE_BADGE]: https://badgen.net/github/license/quintschaf/SwiftyOpenGraph
 [LICENSE_URL]: https://github.com/Quintschaf/SwiftyOpenGraph/blob/master/LICENSE
