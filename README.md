@@ -69,7 +69,7 @@ Example:
 ```swift
 switch graph.type {
 case .video(let attributes):
-    print(attributes.king)          // VideoAttributes.SubKind.movie
+    print(attributes.kind)          // VideoAttributes.SubKind.movie
     print(attributes.actors)        // []
     print(attributes.directors)     // []
     print(attributes.writers)       // []
