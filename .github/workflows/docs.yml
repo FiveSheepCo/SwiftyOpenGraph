@@ -5,10 +5,9 @@ name: Generate Docs
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
