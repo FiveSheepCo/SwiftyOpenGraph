@@ -17,6 +17,7 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v2.4.0
       - name: Generate Docs
         uses: sersoft-gmbh/swifty-docs-action@v1.2.1
         with:
