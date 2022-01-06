@@ -4,7 +4,7 @@ extension OpenGraphType {
     
     public struct BookAttributes {
         /// Who wrote this book.
-        public let author: String?
+        public let authors: [String]
         /// The ISBN.
         public let isbn: String?
         /// The date the book was released.
@@ -22,7 +22,7 @@ extension OpenGraphType {
         }
         
         init(properties: [_KeyValuePair]) {
-            var author: String?
+            var authors: [String] = []
             var isbn: String?
             var releaseDateString: String?
             var tags: [String] = []
@@ -30,7 +30,7 @@ extension OpenGraphType {
             for property in properties {
                 switch property.key {
                 case Constants.authorProperty:
-                    author = property.value
+                    authors.append(property.value)
                 case Constants.isbnProperty:
                     isbn = property.value
                 case Constants.releaseDateProperty:
@@ -42,7 +42,7 @@ extension OpenGraphType {
                 }
             }
             
-            self.author = author
+            self.authors = authors
             self.isbn = isbn
             self.releaseDate = _getDate(from: releaseDateString)
             self.tags = tags
