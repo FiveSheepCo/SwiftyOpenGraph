@@ -69,7 +69,7 @@ Example:
 ```swift
 switch graph.type {
 case .video(let attributes):
-    print(attributes.king)          // VideoAttributes.SubKind.movie
+    print(attributes.kind)          // VideoAttributes.SubKind.movie
     print(attributes.actors)        // []
     print(attributes.directors)     // []
     print(attributes.writers)       // []
@@ -82,8 +82,6 @@ default:
 }
 ```
 
-## Types
-
 # Installation
 
 ### Swift Package Manager
@@ -94,9 +92,13 @@ SwiftyOpenGraph relies on Swift Package Manager and is installed by adding it as
 
 We have chosen to use the CC0 1.0 Universal license for SwiftyOpenGraph. The following short explanation has no legal implication whatsoever and does not override the license in any way: CC0 1.0 Universal license gives you the right to use or modify all of SwiftyOpenGraphs code in any (commercial or non-commercial) product without mentioning, licensing or other headaches of any kind.
 
+# Background
+
+When we were trying to find an OpenGraph implementation in Swift there was only one result. That result was using Regular Expressions to parse the meta tags, which we find unacceptable. So we set out to create one that uses `SwiftSoup` to properly parse the html of a webpage. We also wanted to make sure this project is a perfect 1:1 abstraction of the OpenGraph protocol into Swift. If there are any additions or changes made to the protocol, we will adopt them as fast as possible.
+
 <!-- References -->
 
-[GithubCI_Status]: https://github.com/Quintschaf/SwiftyOpenGraph/actions/workflows/swift.yml/badge.svg?branch=master
+[GithubCI_Status]: https://github.com/Quintschaf/SwiftyOpenGraph/actions/workflows/swift.yml/badge.svg?branch=main
 [GithubCI_URL]: https://github.com/Quintschaf/SwiftyOpenGraph/actions/workflows/swift.yml
 [LICENSE_BADGE]: https://badgen.net/github/license/quintschaf/SwiftyOpenGraph
 [LICENSE_URL]: https://github.com/Quintschaf/SwiftyOpenGraph/blob/master/LICENSE
