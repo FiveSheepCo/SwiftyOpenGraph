@@ -264,20 +264,20 @@ final class OpenGraphTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(graph.title, "Fallen Embers (Deluxe Version) by ILLENIUM")
+        XCTAssertEqual(graph.title, "Fallen Embers (Deluxe Version) by ILLENIUM on Apple Music")
         XCTAssertEqual(graph.url, url)
         
-        XCTAssertEqual(graph.image.url, "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/22/fd/04/22fd0452-fb15-dffb-ea15-15e83a525fdf/093624874690.jpg/1200x1200bf-60.jpg")
-        XCTAssertEqual(graph.image.secureUrl, "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/22/fd/04/22fd0452-fb15-dffb-ea15-15e83a525fdf/093624874690.jpg/1200x1200bf-60.jpg")
-        XCTAssertEqual(graph.image.alt, "Fallen Embers (Deluxe Version) by ILLENIUM")
+        XCTAssertEqual(graph.image.url, "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/94/c2/14/94c21487-8703-4ae5-9386-17335d5e9f5d/093624874690.jpg/1200x1200bf-60.jpg")
+        XCTAssertEqual(graph.image.secureUrl, "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/94/c2/14/94c21487-8703-4ae5-9386-17335d5e9f5d/093624874690.jpg/1200x1200bf-60.jpg")
+        XCTAssertEqual(graph.image.alt, "Fallen Embers (Deluxe Version) by ILLENIUM on Apple Music")
         XCTAssertEqual(graph.image.width, 1200)
         XCTAssertEqual(graph.image.height, 1200)
-        XCTAssertEqual(graph.image.mimeType, "image/png")
+        XCTAssertEqual(graph.image.mimeType, "image/jpg")
         
         switch graph.type {
         case .album(let album):
             XCTAssertEqual(album.songs.count, 19)
-            XCTAssertEqual(album.songs[0].url, "https://music.apple.com/us/album/wouldnt-change-a-thing/1591091543?i=1591091768")
+            XCTAssertEqual(album.songs[0].url, "https://music.apple.com/us/song/wouldnt-change-a-thing/1591091768")
             XCTAssertEqual(album.songs[0].disc, 1)
             XCTAssertEqual(album.songs[0].track, 1)
             XCTAssertEqual(album.songs[0].duration, 187)
