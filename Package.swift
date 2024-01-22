@@ -19,7 +19,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/Quintschaf/SchafKit.git", .branch("master")),
+        .package(url: "https://github.com/FiveSheepCo/SchafKit.git", .branch("master")),
         .package(url: "https://github.com/scinfu/SwiftSoup", .branch("master")),
     ],
     targets: [

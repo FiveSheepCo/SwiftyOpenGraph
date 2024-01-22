@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "SchafKit",
-        "repositoryURL": "https://github.com/Quintschaf/SchafKit.git",
+        "repositoryURL": "https://github.com/FiveSheepCo/SchafKit.git",
         "state": {
           "branch": "master",
           "revision": "8567f948567e4d6fccb80cca1402e1044a4b01e0",
