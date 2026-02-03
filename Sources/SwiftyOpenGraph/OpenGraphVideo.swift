@@ -1,6 +1,6 @@
 import Foundation
 
-public struct OpenGraphVideo {
+public struct OpenGraphVideo: Codable {
     public let url: String
     public let secureUrl: String?
     public let mimeType: String?

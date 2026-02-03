@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct SongAttributes {
+    public struct SongAttributes: Codable {
         /// The url of the song. Only set if the song is included as a subtype (in an album or a playlist).
         public let url: String?
         

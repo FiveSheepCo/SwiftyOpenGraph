@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct ArticleAttributes {
+    public struct ArticleAttributes: Codable {
         /// When the article was first published.
         public let publishedTime: Date?
         /// When the article was last changed.

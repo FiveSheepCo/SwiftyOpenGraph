@@ -1,15 +1,23 @@
 import Foundation
 
 func _getDuration(from string: String?) -> Int? {
-    string.flatMap { (durationString: String) in
-        if let duration = Int(durationString) {
-            return duration
-        } else if let match = durationString.regexMatches(with: "PT(\\d+)M(\\d+)S")?.first,
-                  let minutes = match.captureGroups[0]?.toInt,
-                  let seconds = match.captureGroups[1]?.toInt {
-            return minutes * 60 + seconds
-        } else {
-            return nil
-        }
+    guard let durationString = string, !durationString.isEmpty else {
+        return nil
     }
+
+    // If it's just an integer string, return it directly
+    if let duration = Int(durationString) {
+        return duration
+    }
+
+    // Match patterns like "PT3M25S"
+    let regex = #/PT(\d+)M(\d+)S/#
+
+    if let match = durationString.wholeMatch(of: regex),
+       let minutes = Int(match.1),
+       let seconds = Int(match.2) {
+        return minutes * 60 + seconds
+    }
+
+    return nil
 }

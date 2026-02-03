@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType.VideoAttributes {
     
-    public struct Actor {
+    public struct Actor: Codable {
         public let url: String
         public let role: String?
         

@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct ProfileAttributes {
+    public struct ProfileAttributes: Codable {
         /// A name normally given to an individual by a parent or self-chosen.
         public let firstName: String?
         /// A name inherited from a family or marriage and by which the individual is commonly known.
@@ -21,7 +21,7 @@ extension OpenGraphType {
             static let genderProperty = "article:gender"
         }
         
-        public enum Gender: String {
+        public enum Gender: String, Codable {
             case male, female
         }
         

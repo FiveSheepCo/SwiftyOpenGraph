@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct BookAttributes {
+    public struct BookAttributes: Codable {
         /// Who wrote this book.
         public let authors: [String]
         /// The ISBN.

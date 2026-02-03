@@ -1,26 +1,30 @@
 import Foundation
 import SwiftSoup
-import SchafKit
+import AsyncNetworking
 
-public struct OpenGraph {
-    /// The title of your object as it should appear within the graph, e.g., "The Rock".
+public enum OpenGraphError: Error {
+    case invalidHTML
+    case parsingFailed(String)
+    case missingRequiredField(String)
+}
+
+public struct OpenGraph: Codable {
+    /// The title of the page, taken from the standard <title> element (falling back to og:title).
     public let title: String
-    /// The type of your object, e.g., "video.movie". Depending on the type you specify, other properties may also be required.
-    public let type: OpenGraphType
-    /// An image URL which should represent your object within the graph.
-    public let image: OpenGraphImage
+    /// The type of your object, e.g., "video.movie". Optional if it cannot be determined.
+    public let type: OpenGraphType?
     /// The canonical URL of your object that will be used as its permanent ID in the graph, e.g., "https://www.imdb.com/title/tt0117500/".
     public let url: String
     
-    /// Other images included.
-    public let additionalImages: [OpenGraphImage]
+    /// All images included via Open Graph.
+    public let images: [OpenGraphImage]
     
     /// Audio files to accompany this object.
     public let audios: [OpenGraphAudio]
     /// Video files that complement this object.
     public let videos: [OpenGraphVideo]
     /// A one to two sentence description of your object.
-    public let description: String?
+    public let itemDescription: String?
     /// The word that appears before this object's title in a sentence. Default is "" (blank).
     public let determiner : Determiner
     /// The locale these tags are marked up in. Of the format `language_TERRITORY`. Default is `en_US`.
@@ -39,7 +43,6 @@ public struct OpenGraph {
         static let titleProperty = "og:title"
         static let urlProperty = "og:url"
         
-        // TODO: Implement these
         // Optional properties
         static let audioProperty = "og:audio"
         static let descriptionProperty = "og:description"
@@ -57,47 +60,48 @@ public struct OpenGraph {
     public init?(url: String) async throws {
         guard
             let html =
-                try await SKNetworking
+                try await AsyncNetworking
                 .request(
                     url: url,
                     options: [
                         .headerFields(value: [.userAgent: "Googlebot"]) // Some websites require this to return the open graph values
                     ]
                 )
-                .stringValue else {
-                    return nil
-                }
+                .stringValue
+        else {
+            throw OpenGraphError.invalidHTML
+        }
         
-        self.init(html: html)
+        try self.init(html: html)
     }
     
-    public init?(html: String)  {
+    public init?(html: String) throws {
         do {
             let doc: Document = try SwiftSoup.parse(html)
             
             // Put all meta properties into a key-value pair array
-            let parsed = try doc.select(Constants.metaTag).map({ element in
+            let parsed = try doc.select(Constants.metaTag).map { element in
                 _KeyValuePair(
                     key: try element.attr(Constants.propertyAttribute),
                     value: try element.attr(Constants.contentAttribute)
                 )
-            })
+            }
             
             func getFirstValue(for key: String) -> String? {
                 parsed.first(where: { $0.key == key })?.value
             }
             
-            // Find required single values title and url
+            // og:title and og:url are required
             guard
-                let title = getFirstValue(for: Constants.titleProperty),
-                let url = getFirstValue(for: Constants.urlProperty) else {
-                    return nil
-                }
+                let ogTitle = getFirstValue(for: Constants.titleProperty),
+                let url = getFirstValue(for: Constants.urlProperty)
+            else { return nil }
             
-            // Find images
+            // Find images / audio / video
             var images: [OpenGraphImage] = []
             var audios: [OpenGraphAudio] = []
             var videos: [OpenGraphVideo] = []
+            
             for (index, kVP) in parsed.enumerated() {
                 
                 func getRemainingKVPs() -> [_KeyValuePair] {
@@ -114,45 +118,49 @@ public struct OpenGraph {
                 }
                 
                 if OpenGraphAudio.Constants.urlProperties.contains(kVP.key) {
-                    audios.append(.init(
-                        url: kVP.value,
-                        followingProperties: getRemainingKVPs()
-                    ))
+                    audios.append(
+                        .init(
+                            url: kVP.value,
+                            followingProperties: getRemainingKVPs()
+                        )
+                    )
                 }
                 
                 if OpenGraphVideo.Constants.urlProperties.contains(kVP.key) {
-                    videos.append(.init(
-                        url: kVP.value,
-                        followingProperties: getRemainingKVPs()
-                    ))
+                    videos.append(
+                        .init(
+                            url: kVP.value,
+                            followingProperties: getRemainingKVPs()
+                        )
+                    )
                 }
             }
             
-            // Make sure the first image exists
-            guard let firstImage = images.removeFirstIfExists() else { return nil }
-            
-            // Decode the type from the given properties
+            // Decode the type from the given properties (now optional)
             let type = OpenGraphType(kVPs: parsed)
             
             // Set properties
-            self.title = title
-            self.image = firstImage
+            self.title = ogTitle
             self.type = type
             self.url = url
             
             self.audios = audios
             self.videos = videos
-            self.description = getFirstValue(for: Constants.descriptionProperty)
-            self.determiner = Determiner(rawValue: getFirstValue(for: Constants.determinerProperty) ?? Constants.defaultDeterminer.rawValue) ?? Constants.defaultDeterminer
+            self.itemDescription = getFirstValue(for: Constants.descriptionProperty)
+            self.determiner = Determiner(
+                rawValue: getFirstValue(for: Constants.determinerProperty)
+                ?? Constants.defaultDeterminer.rawValue
+            ) ?? Constants.defaultDeterminer
             self.siteName = getFirstValue(for: Constants.siteNameProperty)
             
             self.locale = getFirstValue(for: Constants.localeProperty) ?? Constants.defaultLocale
-            self.alternateLocales = parsed.filter({ $0.key == Constants.alternateLocaleProperty }).map(\.value)
+            self.alternateLocales = parsed
+                .filter { $0.key == Constants.alternateLocaleProperty }
+                .map(\.value)
             
-            self.additionalImages = images
-        } catch let err {
-            assertionFailure(err.localizedDescription)
-            return nil
+            self.images = images
+        } catch let error {
+            throw OpenGraphError.parsingFailed(error.localizedDescription)
         }
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct OpenGraphImage {
+public struct OpenGraphImage: Codable {
     
     public let url: String
     public let secureUrl: String?

@@ -2,11 +2,29 @@
   "object": {
     "pins": [
       {
-        "package": "SchafKit",
-        "repositoryURL": "https://github.com/FiveSheepCo/SchafKit.git",
+        "package": "AsyncNetworking",
+        "repositoryURL": "https://github.com/FiveSheepCo/AsyncNetworking.git",
         "state": {
-          "branch": "master",
-          "revision": "8567f948567e4d6fccb80cca1402e1044a4b01e0",
+          "branch": "main",
+          "revision": "21da267017d5cb6bc85df84ac45192049c918b44",
+          "version": null
+        }
+      },
+      {
+        "package": "FiveKit",
+        "repositoryURL": "https://github.com/FiveSheepCo/FiveKit.git",
+        "state": {
+          "branch": "main",
+          "revision": "f91c5d89b138a19e0084b05941ff7ce60bf97a43",
+          "version": null
+        }
+      },
+      {
+        "package": "FoundationPlus",
+        "repositoryURL": "https://github.com/FiveSheepCo/FoundationPlus.git",
+        "state": {
+          "branch": "main",
+          "revision": "b142492bc3c2eb9304c5321252df5cd2a7755282",
           "version": null
         }
       },
@@ -16,6 +34,15 @@
         "state": {
           "branch": "master",
           "revision": "3fa09f4d79e5172b14cb50e02f1d5f115a2bbaef",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftUIElements",
+        "repositoryURL": "https://github.com/FiveSheepCo/SwiftUIElements.git",
+        "state": {
+          "branch": "main",
+          "revision": "867f5c4a0a373a8b94e2061c99706bafaa970f5d",
           "version": null
         }
       }

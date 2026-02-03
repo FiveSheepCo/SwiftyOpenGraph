@@ -1,6 +1,6 @@
 import Foundation
 
-public enum OpenGraphType {
+public enum OpenGraphType: Codable {
     
     internal enum Constants {
         static let typeProperty = "og:type"

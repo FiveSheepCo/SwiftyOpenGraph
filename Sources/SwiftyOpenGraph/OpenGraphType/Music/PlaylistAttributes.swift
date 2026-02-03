@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct PlaylistAttributes {
+    public struct PlaylistAttributes: Codable {
         /// The songs on this playlist.
         public let songs: [SongAttributes]
         /// The creator of this playlist.

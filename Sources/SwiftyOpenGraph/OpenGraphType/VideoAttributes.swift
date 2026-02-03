@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct VideoAttributes {
+    public struct VideoAttributes: Codable {
         
         /// The kind of the video.
         public let kind: SubKind

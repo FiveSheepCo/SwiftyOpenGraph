@@ -2,7 +2,7 @@ import Foundation
 
 extension OpenGraphType {
     
-    public struct RadioStationAttributes {
+    public struct RadioStationAttributes: Codable {
         /// The creator of this station.
         public let creator: String?
         
